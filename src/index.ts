@@ -13,7 +13,7 @@ let collection = new TodoCollection('Martin', todoList);
 console.clear();
 console.log(`${collection.userName}'s Todo List`);
 
-let newId = collection.addTodo('Go to run');
+let newId = collection.addTodo('Play basketball');
 let todoItem = collection.getTodoById(newId);
 console.log(JSON.stringify(todoItem));
 console.log("\n here is the full list: ");

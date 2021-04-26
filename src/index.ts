@@ -26,6 +26,8 @@ function displayTodoList(): void {
 enum Commands {
     Toggle = "Show/Hide Complete",
     Add = "Add New Task",
+    Complete = "Complete Task",
+    Purge = "Remove Completed Tasks",
     Quit = "Quit",
 }
 
@@ -43,6 +45,25 @@ function promptAdd(): void {
     });
 }
 
+function completeTask(): void {
+    console.clear();
+    inquirer.prompt({
+        type: "list",
+        name: "task",
+        message: "Choose the task to complete:",
+        choices: collection.getTodoItems(false).length > 0 ? collection.getTodoItems(false).map(ele => {
+            return `${ele.id} ${ele.task}`;
+        }) : ["ALL TASKS FULFILLED"],
+    }).then(answers => {
+        if (answers['task'] !== "") {
+            let chosen_id = answers['task'].split(" ")[0];
+            collection.markComplete(parseInt(chosen_id), true);
+        }
+        promptUser();
+    });
+}
+
+
 function promptUser(): void {
     console.clear();
     displayTodoList();
@@ -59,6 +80,13 @@ function promptUser(): void {
                 break;
             case  Commands.Add:
                 promptAdd();
+                break;
+            case Commands.Complete:
+                completeTask();
+                break;
+            case Commands.Purge:
+                collection.removeComplete();
+                promptUser();
                 break;
             default:
                 if (answers['command'] !== Commands.Quit) {

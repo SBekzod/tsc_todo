@@ -33,7 +33,7 @@ function promptUser() {
         type: "list",
         name: "command",
         message: "Choose options",
-        choices: Object.values(Commands)
+        choices: Object.values(Commands),
     }).then(answers => {
         if (answers['command'] !== Commands.Quit) {
             promptUser();
@@ -41,5 +41,3 @@ function promptUser() {
     });
 }
 promptUser();
-console.log('Type:', typeof (Object.values(Commands)));
-console.log('Value:', Object.values(Commands));

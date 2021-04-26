@@ -27,4 +27,8 @@ export class TodoCollection {
         }
     }
 
+    public getTodoItems(includeComplete: boolean): TodoItem[] {
+        return [...this.itemMap.values()].filter(item => includeComplete || !item.complete);
+    }
+
 }

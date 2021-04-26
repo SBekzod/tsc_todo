@@ -6,13 +6,13 @@ let todoList = [
     new todoItem_1.TodoItem(1, "Buy Flowers"),
     new todoItem_1.TodoItem(2, "Get Shoes"),
     new todoItem_1.TodoItem(3, "Collect tickets"),
-    new todoItem_1.TodoItem(4, "Call to Jack"),
+    new todoItem_1.TodoItem(4, "Call to Jack", true),
 ];
 let collection = new todoCollection_1.TodoCollection('Martin', todoList);
 console.clear();
-console.log(`${collection.userName}'s Todo List`);
-let newId = collection.addTodo('Go to run');
+console.log(`${collection.userName}'s Todo List: `);
+let newId = collection.addTodo('Play basketball');
 let todoItem = collection.getTodoById(newId);
-console.log(JSON.stringify(todoItem));
-console.log("\n here is the full list: ");
-console.log(JSON.stringify(todoList));
+collection.getTodoItems(false).forEach(function (item) {
+    item.printDetails();
+});

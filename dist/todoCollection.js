@@ -15,18 +15,19 @@ class TodoCollection {
             this.nextId++;
         }
         this.itemMap.set(this.nextId, new todoItem_1.TodoItem(this.nextId, task));
-        // this.todoItems.push(new TodoItem(this.nextId, task));
         return this.nextId;
     }
     getTodoById(id) {
         return this.itemMap.get(id);
-        // return this.todoItems.find(item => item.id === id);
     }
     markComplete(id, complete) {
         const todoItem = this.getTodoById(id);
         if (todoItem) {
             todoItem.complete = complete;
         }
+    }
+    getTodoItems(includeComplete) {
+        return [...this.itemMap.values()].filter(item => includeComplete || !item.complete);
     }
 }
 exports.TodoCollection = TodoCollection;

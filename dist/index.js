@@ -11,20 +11,19 @@ let todoList = [
 ];
 let collection = new todoCollection_1.TodoCollection('Martin', todoList);
 collection.addTodo('Play basketball');
+let showComplete = true;
 function displayTodoList() {
     console.log(`${collection.userName}'s Todo List: `);
     let itemCountInfo = collection.getItemCounts();
     console.log(`The total tasks: ${itemCountInfo.total} and incomplete tasks: ${itemCountInfo.incomplete}`);
-    collection.getTodoItems(true).forEach(function (item) {
+    collection.getTodoItems(showComplete).forEach(function (item) {
         item.printDetails();
     });
 }
 var Commands;
 (function (Commands) {
-    Commands["Wait"] = "Wait";
-    Commands["Goon"] = "Goon";
+    Commands["Toggle"] = "Show/Hide Complete";
     Commands["Quit"] = "Quit";
-    Commands["Other"] = "Other";
 })(Commands || (Commands = {}));
 function promptUser() {
     console.clear();
@@ -35,8 +34,16 @@ function promptUser() {
         message: "Choose options",
         choices: Object.values(Commands),
     }).then(answers => {
-        if (answers['command'] !== Commands.Quit) {
-            promptUser();
+        switch (answers["command"]) {
+            case Commands.Toggle:
+                showComplete = !showComplete;
+                promptUser();
+                break;
+            default:
+                if (answers['command'] !== Commands.Quit) {
+                    promptUser();
+                }
+                break;
         }
     });
 }

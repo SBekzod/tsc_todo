@@ -12,20 +12,20 @@ let todoList: TodoItem[] = [
 let collection: TodoCollection = new TodoCollection('Martin', todoList);
 collection.addTodo('Play basketball');
 
+let showComplete: boolean = true;
+
 function displayTodoList(): void {
     console.log(`${collection.userName}'s Todo List: `);
     let itemCountInfo = collection.getItemCounts();
     console.log(`The total tasks: ${itemCountInfo.total} and incomplete tasks: ${itemCountInfo.incomplete}`);
-    collection.getTodoItems(true).forEach(function (item) {
+    collection.getTodoItems(showComplete).forEach(function (item) {
         item.printDetails();
     });
 }
 
 enum Commands {
-    Wait = "Wait",
-    Goon = "Goon",
+    Toggle = "Show/Hide Complete",
     Quit = "Quit",
-    Other = "Other"
 }
 
 function promptUser(): void {
@@ -37,8 +37,16 @@ function promptUser(): void {
         message: "Choose options",
         choices: Object.values(Commands),
     }).then(answers => {
-        if (answers['command'] !== Commands.Quit) {
-            promptUser();
+        switch (answers["command"]) {
+            case Commands.Toggle:
+                showComplete = !showComplete;
+                promptUser();
+                break;
+            default:
+                if (answers['command'] !== Commands.Quit) {
+                    promptUser();
+                }
+                break;
         }
     });
 }

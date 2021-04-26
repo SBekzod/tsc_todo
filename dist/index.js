@@ -11,6 +11,7 @@ let todoList = [
 ];
 let collection = new todoCollection_1.TodoCollection('Martin', todoList);
 collection.addTodo('Play basketball');
+// defining the state of showing the completed tasks
 let showComplete = true;
 function displayTodoList() {
     console.log(`${collection.userName}'s Todo List: `);
@@ -23,8 +24,22 @@ function displayTodoList() {
 var Commands;
 (function (Commands) {
     Commands["Toggle"] = "Show/Hide Complete";
+    Commands["Add"] = "Add New Task";
     Commands["Quit"] = "Quit";
 })(Commands || (Commands = {}));
+function promptAdd() {
+    console.clear();
+    inquirer.prompt({
+        type: "input",
+        name: "add",
+        message: "Enter new task:"
+    }).then(answers => {
+        if (answers['add'] !== "") {
+            collection.addTodo(answers['add']);
+        }
+        promptUser();
+    });
+}
 function promptUser() {
     console.clear();
     displayTodoList();
@@ -39,6 +54,9 @@ function promptUser() {
                 showComplete = !showComplete;
                 promptUser();
                 break;
+            case Commands.Add:
+                promptAdd();
+                break;
             default:
                 if (answers['command'] !== Commands.Quit) {
                     promptUser();
@@ -47,4 +65,5 @@ function promptUser() {
         }
     });
 }
+// main computing of the index.ts
 promptUser();

@@ -11,7 +11,7 @@ let todoList: TodoItem[] = [
 
 let collection: TodoCollection = new TodoCollection('Martin', todoList);
 collection.addTodo('Play basketball');
-
+// defining the state of showing the completed tasks
 let showComplete: boolean = true;
 
 function displayTodoList(): void {
@@ -25,7 +25,22 @@ function displayTodoList(): void {
 
 enum Commands {
     Toggle = "Show/Hide Complete",
+    Add = "Add New Task",
     Quit = "Quit",
+}
+
+function promptAdd(): void {
+    console.clear();
+    inquirer.prompt({
+        type: "input",
+        name: "add",
+        message: "Enter new task:"
+    }).then(answers => {
+        if (answers['add'] !== "") {
+            collection.addTodo(answers['add']);
+        }
+        promptUser();
+    });
 }
 
 function promptUser(): void {
@@ -42,6 +57,9 @@ function promptUser(): void {
                 showComplete = !showComplete;
                 promptUser();
                 break;
+            case  Commands.Add:
+                promptAdd();
+                break;
             default:
                 if (answers['command'] !== Commands.Quit) {
                     promptUser();
@@ -51,6 +69,8 @@ function promptUser(): void {
     });
 }
 
+
+// main computing of the index.ts
 promptUser();
 
 

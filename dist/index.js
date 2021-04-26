@@ -16,3 +16,12 @@ let todoItem = collection.getTodoById(newId);
 collection.getTodoItems(false).forEach(function (item) {
     item.printDetails();
 });
+console.log('before full list');
+collection.getTodoItems(true).forEach(function (item) {
+    item.printDetails();
+});
+collection.removeComplete();
+console.log('after full list');
+collection.getTodoItems(true).forEach(function (item) {
+    item.printDetails();
+});

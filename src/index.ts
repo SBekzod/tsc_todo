@@ -9,24 +9,15 @@ let todoList = [
 ];
 
 let collection = new TodoCollection('Martin', todoList);
+collection.addTodo('Play basketball');
 
 console.clear();
 console.log(`${collection.userName}'s Todo List: `);
 
-let newId = collection.addTodo('Play basketball');
-let todoItem = collection.getTodoById(newId);
+let itemCountInfo = collection.getItemCounts();
+console.log(`The total tasks: ${itemCountInfo.total} and incomplete tasks: ${itemCountInfo.incomplete}`);
 
-collection.getTodoItems(false).forEach(function (item) {
-    item.printDetails();
-});
-
-console.log('before full list')
 collection.getTodoItems(true).forEach(function (item) {
     item.printDetails();
 });
 
-collection.removeComplete();
-console.log('after full list')
-collection.getTodoItems(true).forEach(function (item) {
-    item.printDetails();
-});

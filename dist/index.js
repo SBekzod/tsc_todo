@@ -9,19 +9,11 @@ let todoList = [
     new todoItem_1.TodoItem(4, "Call to Jack", true),
 ];
 let collection = new todoCollection_1.TodoCollection('Martin', todoList);
+collection.addTodo('Play basketball');
 console.clear();
 console.log(`${collection.userName}'s Todo List: `);
-let newId = collection.addTodo('Play basketball');
-let todoItem = collection.getTodoById(newId);
-collection.getTodoItems(false).forEach(function (item) {
-    item.printDetails();
-});
-console.log('before full list');
-collection.getTodoItems(true).forEach(function (item) {
-    item.printDetails();
-});
-collection.removeComplete();
-console.log('after full list');
+let itemCountInfo = collection.getItemCounts();
+console.log(`The total tasks: ${itemCountInfo.total} and incomplete tasks: ${itemCountInfo.incomplete}`);
 collection.getTodoItems(true).forEach(function (item) {
     item.printDetails();
 });

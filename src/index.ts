@@ -14,6 +14,17 @@ collection.addTodo('Play basketball');
 // defining the state of showing the completed tasks
 let showComplete: boolean = true;
 
+enum Commands {
+    Toggle = "Show/Hide Complete",
+    Add = "Add New Task",
+    Complete = "Complete Task",
+    Purge = "Remove Completed Tasks",
+    Quit = "Quit",
+}
+
+// main computing of the index.ts
+promptUser();
+
 function displayTodoList(): void {
     console.log(`${collection.userName}'s Todo List: `);
     let itemCountInfo = collection.getItemCounts();
@@ -21,14 +32,6 @@ function displayTodoList(): void {
     collection.getTodoItems(showComplete).forEach(function (item) {
         item.printDetails();
     });
-}
-
-enum Commands {
-    Toggle = "Show/Hide Complete",
-    Add = "Add New Task",
-    Complete = "Complete Task",
-    Purge = "Remove Completed Tasks",
-    Quit = "Quit",
 }
 
 function promptAdd(): void {
@@ -96,9 +99,5 @@ function promptUser(): void {
         }
     });
 }
-
-
-// main computing of the index.ts
-promptUser();
 
 

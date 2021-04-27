@@ -15,7 +15,9 @@ class TodoCollection {
             this.nextId++;
         }
         this.itemMap.set(this.nextId, new todoItem_1.TodoItem(this.nextId, task));
-        return this.nextId;
+        let return_val = this.nextId;
+        this.nextId = 1;
+        return return_val;
     }
     getTodoById(id) {
         return this.itemMap.get(id);

@@ -12,10 +12,10 @@ type schemaType = {
 export class JsonTodoCollection extends TodoCollection {
     private database: lowDb.LowdbSync<schemaType>;
 
-    public constructor(public userName: string, public todoItems: TodoItem[] = []) {
+    public constructor(public userName: string, todoItems: TodoItem[] = []) {
         super(userName, []);
         this.database = lowDb(new FileSync("Todo.json"));
-        if (this.database.has('tasks').value) {
+        if (this.database.has('tasks').value()) {
             let dbItems = this.database.get('tasks').value();
             dbItems.forEach(item => this.itemMap.set(item.id, new TodoItem(item.id, item.task, item.complete)))
         } else {

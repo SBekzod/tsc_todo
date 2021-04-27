@@ -9,9 +9,8 @@ class JsonTodoCollection extends todoCollection_1.TodoCollection {
     constructor(userName, todoItems = []) {
         super(userName, []);
         this.userName = userName;
-        this.todoItems = todoItems;
         this.database = lowDb(new FileSync("Todo.json"));
-        if (this.database.has('tasks').value) {
+        if (this.database.has('tasks').value()) {
             let dbItems = this.database.get('tasks').value();
             dbItems.forEach(item => this.itemMap.set(item.id, new todoItem_1.TodoItem(item.id, item.task, item.complete)));
         }

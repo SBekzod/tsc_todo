@@ -1,19 +1,19 @@
 import {TodoItem} from "./todoItem";
 import {TodoCollection} from "./todoCollection";
 import * as inquirer from "inquirer";
+import {JsonTodoCollection} from "./jsonTodoCollection";
 
 let todoList: TodoItem[] = [
     new TodoItem(1, "Buy Flowers"),
     new TodoItem(2, "Get Shoes"),
     new TodoItem(3, "Collect tickets"),
     new TodoItem(4, "Call to Jack", true),
+    new TodoItem(5, "Play basketball" ),
 ];
 
-let collection: TodoCollection = new TodoCollection('Martin', todoList);
-collection.addTodo('Play basketball');
+let collection: TodoCollection = new JsonTodoCollection('Martin', todoList);
 // defining the state of showing the completed tasks
 let showComplete: boolean = true;
-
 enum Commands {
     Toggle = "Show/Hide Complete",
     Add = "Add New Task",
@@ -21,8 +21,7 @@ enum Commands {
     Purge = "Remove Completed Tasks",
     Quit = "Quit",
 }
-
-// main computing of the index.ts
+// MAIN COMPUTING: index.ts
 promptUser();
 
 function displayTodoList(): void {

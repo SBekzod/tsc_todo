@@ -2,32 +2,17 @@
   "tasks": [
     {
       "id": 1,
-      "task": "Buy Flowers",
+      "task": "teach programming ",
       "complete": false
     },
     {
       "id": 2,
-      "task": "Get Shoes",
+      "task": "drive a car",
       "complete": false
     },
     {
       "id": 3,
-      "task": "Collect tickets",
-      "complete": false
-    },
-    {
-      "id": 4,
-      "task": "Call to Jack",
-      "complete": true
-    },
-    {
-      "id": 5,
-      "task": "Play basketball",
-      "complete": false
-    },
-    {
-      "id": 6,
-      "task": "Say Hi",
+      "task": "ask question",
       "complete": false
     }
   ]
